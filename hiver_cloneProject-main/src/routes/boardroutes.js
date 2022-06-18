@@ -43,8 +43,9 @@
 const express = require("express");
 const Board = require("../models/board");
 // const Comment = require("../models/comment");
-const authMiddleware = require("../middlewares/auth-middleware");
+// const authMiddleware = require("../middlewares/authmiddleware");
 const router = express.Router();
+console.log(111)
 
 // 상품 작성  authMiddleware
 router.post("/api/board", async (req, res) => {
@@ -114,4 +115,4 @@ router.get("/api/board/:boardid", async (req, res) => {
 //   }
 // }) 
 
-module.exports = router;
+module.exports ={ router};
