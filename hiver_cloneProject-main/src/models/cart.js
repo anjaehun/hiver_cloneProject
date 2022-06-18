@@ -1,27 +1,33 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-sequence")(mongoose);
-const boardsSchema = mongoose.Schema({
+const cartsSchema = mongoose.Schema({
     // 게시판 번호 
-    boardId:{ 
+    cartid:{ 
        type : Number, 
-    },
-    // 작성자 명 
-    category: {
-        type : Number,
-        required : true, 
     },
     //제목
     title: {
         type : String,
         required : true, 
     },
-    // 내용
-    content: {  
+    // 기업명
+    enterprise: {  
         type : String, 
         required : true,
     },
-    // 이미지
+    
+    // 대표 이미지
     image1: {
+        type : String, 
+        required : false,
+    },
+    // 옵션 
+    option: {
+        type : String, 
+        required : false,
+    },
+    // 총 값 가격 
+    totalprice: {
         type : String, 
         required : false,
     },
@@ -31,19 +37,18 @@ const boardsSchema = mongoose.Schema({
         required : false,
     }
     
-    
 } , 
     {
         timestamps: true, // 생성, 업데이트 시간 설정createAt updateAt
 
 });
-boardsSchema.plugin(autoIncrement, {
-    inc_field: "boardId",
-  });
+cartsSchema.plugin(autoIncrement, {
+    inc_field: "cartid",
+});
 
 
-const Boards = mongoose.model("Board", boardsSchema);
+const Carts = mongoose.model("Carts", cartsSchema);
 
 
-module.exports = { Boards, boardsSchema };
+module.exports = { Carts, cartsSchema };
  

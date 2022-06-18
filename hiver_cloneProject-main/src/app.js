@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 
 const http = Http.createServer(app);
 
-const {authRouter,boardRouter} = require('./routes');
+const {authRouter,boardRouter,cartRouter} = require('./routes');
 
 const swaggerUi =require("swagger-ui-express");
 const swaggerFile = require("./swagger-output");
@@ -32,7 +32,7 @@ const server = async () => {
 
     app.use(express.urlencoded({ extended: false }));
     
-    app.use("/api", [authRouter,boardRouter]);
+    app.use("/api", [authRouter,boardRouter,cartRouter]);
 
     app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile, {explorer: true}));
  

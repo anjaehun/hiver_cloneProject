@@ -16,7 +16,7 @@ try{
  // console.log("req.file: ", req.file);
   //let payLoad = { url: req.file.location };
   //console.log(payLoad)
-  const {category,title,content} = req.body;
+  const {category,title} = req.body;
   const { nickname } = res.locals.user;
    //const { a } = req.file.originalname;
  

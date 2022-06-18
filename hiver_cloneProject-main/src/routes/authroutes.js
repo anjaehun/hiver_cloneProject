@@ -141,6 +141,7 @@ authRouter.post("/user/signin", async (req, res) => {
         // const { useremail, password } = await authSchema.validateAsync(req.body);
         const { useremail, password } = req.body;
         const user = await Users.findOne({ useremail }).exec();
+        console.log(user);
         const isSamePassword = await bcrypt.compare(password, user.password);
 
         if (!isSamePassword) {
