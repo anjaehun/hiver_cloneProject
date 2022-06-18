@@ -55,4 +55,7 @@ boardsSchema.plugin(autoIncrement, {
   });
 
 
-  module.exports = mongoose.model("Board", boardsSchema);
+  const Boards = mongoose.model("Board", boardsSchema);
+
+
+  module.exports = { Boards, boardsSchema };
