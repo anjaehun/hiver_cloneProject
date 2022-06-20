@@ -15,7 +15,7 @@ const boardsSchema = mongoose.Schema({
         type: String,
         required : true,
     },
-    // 물품 분류 1: 브랜드 2: 쇼핑몰 3: 럭셔리 4. 스포츠  5. 디지털 6. 라이프  
+    // 상품 분류 1: 브랜드 2: 쇼핑몰 3: 럭셔리 4. 스포츠  5. 디지털 6. 라이프  
     category: {
         type : Number,
     },

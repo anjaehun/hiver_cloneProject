@@ -27,10 +27,10 @@ boardRouter.post("/board" , async (req, res) => {
 boardRouter.get("/", async (req, res) => {
   try {
     const boards = await Boards.find({}, { boardid: 1, title:1, enterprise: 1, image1: 1, price: 1, discountper: 1})
-    res.json ({ boards }) 
+    return res.json ({ boards }) 
   } catch(err) {
     res.status(400).send({
-      msg: "조회 실패"
+      errorMessage: "조회 실패"
     })
   }
 });
@@ -40,7 +40,7 @@ boardRouter.get("/", async (req, res) => {
 boardRouter.get("/board/:boardid", async (req, res) => {
   try {
     const { boardid } = req.params
-    const existboards = await Board.find({ boardid }, { boardid: 1, title: 1, enterprise: 1, category: 1,
+    const existboards = await Boards.find({ boardid }, { boardid: 1, title: 1, enterprise: 1, category: 1,
       image1: 1, image2: 1, image3: 1, price: 1, discountper: 1, option: 1});
     if (!existboards.length) {
       return res.status(400).json({ errorMessage: "상품 없음"});
@@ -60,9 +60,9 @@ boardRouter.delete("/board/:boardid", async (req, res) => {
     const { boardid } = req.params
     const deleteboards = await Board.find({ boardid });
     if (deleteboards.length > 0) {
-    await Board.deleteOne({ boardid })
+    await Boards.deleteOne({ boardid })
     }
-    return 
+    return res.json({ success: true })
   } catch(err) {
     res.status(400).send({
       errorMessage: "삭제 오류"
