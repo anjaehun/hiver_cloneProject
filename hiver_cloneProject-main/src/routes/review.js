@@ -9,7 +9,10 @@ const moment = require('moment');
 //review작성
 reviewRouter.post('/board/:boardid/review', async (res, res) => {
     const { boardid } = req.parmas;
-    const { review, tall, option, img } = 
+    const { review, tall, option, img } = req.body;
     const date = moment().add('9','h').format('YYYY-MM-DD HH:mm:ss');
+    const findBoard = await Boards.find({ boardid });
+    const findUser = await Users.find({ nickname });
+    console.log(findBoard, findUser)
     res.send({});
 });
