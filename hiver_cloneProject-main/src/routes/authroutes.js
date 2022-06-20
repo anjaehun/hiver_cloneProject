@@ -8,58 +8,8 @@ const { Users, Boards, Bookmarks } = require("../models/");
 const authMiddleware = require("../middlewares/authMiddleware");
 
 
-// const userSchema = Joi.object({
-//     useremail: Joi.string().email().required(), // email 타입
-//     nickname: Joi.string().alphanum().min(3).max(30).required(), // 닉네임은 영문숫자 조합으로 최소 3자에서 30자까지
-//     password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,30}$')).required(), // 비밀번호는 대소문자숫자를 4~30자로 구성
-//     checkpassword: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,30}$')).required(),
-// });
-
-
-// 회원가입 joi
-// authRouter.post("/user/signup", async (req, res) => {
-//     try {
-//         // const { useremail, nickname, password, checkpassword } = await userSchema.validateAsync(req.body);
-//         console.log(req.body);
-//         if (password !== checkpassword) {
-//             res.status(400).send({
-//                 errorMessage: "패스워드가 일치 하지 않습니다.",
-//             });
-//             return;
-//         }
-
-//         const exisUsers = await Users.find({ nickname, useremail });
-//         if (exisUsers.length) {
-//             res.status(400).send({
-//                 errorMessage: " 이미 가입된 이메일 또는 닉네임  입니다.",
-//             });
-//             return
-//         }
-
-//         if (nickname === password){
-//             res.status(400).send({
-//                 errorMessage: " 닉네임과 비밀번호는 같을 수 없습니다.",
-//             });
-//             return
-//         };
-
-//         const user = new Users({ useremail, nickname, password });
-//         await user.save();
-
-//         res.status(201).send({});
-//     } catch (err) {
-//         console.log(err);
-//         res.status(400).send({
-//             errorMessage: "요청한 데이터 형식이 올바르지 않습니다.",
-//         });
-//     }
-// });
-
 // 회원가입 정규식
 authRouter.post("/user/signup", async (req, res) => {
-    // #swagger.tags = ["Auth"]
-    // #swagger.summary = "회원가입 페이지"
-    // #swagger.description = "회원가입 페이지"
     const { useremail, nickname, password, checkpassword } = req.body;
     const regExpUesereamil = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
     try {
@@ -120,7 +70,7 @@ authRouter.post("/user/signup", async (req, res) => {
             message: "회원가입을 축하합니다"
         });
 
-    } catch {
+    } catch(err) {
         console.log(err);
         res.status(400).send({
             errorMessage: "요청한 데이터 형식이 올바르지 않습니다.",
@@ -129,10 +79,6 @@ authRouter.post("/user/signup", async (req, res) => {
 });
 
 // 로그인
-// const authSchema = Joi.object({
-//     useremail: Joi.string().email().required(),
-//     password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{4,30}$')).required(),
-// });
 authRouter.post("/user/signin", async (req, res) => {
     try {
         // #swagger.tags = ["Auth"]
@@ -141,6 +87,7 @@ authRouter.post("/user/signin", async (req, res) => {
         // const { useremail, password } = await authSchema.validateAsync(req.body);
         const { useremail, password } = req.body;
         const user = await Users.findOne({ useremail }).exec();
+        console.log(user);
         const isSamePassword = await bcrypt.compare(password, user.password);
 
         if (!isSamePassword) {

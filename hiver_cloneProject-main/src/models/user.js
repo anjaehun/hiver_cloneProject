@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         requirde: true,
     },
+    
 },
     {
         timestamps: true // 생성, 업데이트 시간 설정

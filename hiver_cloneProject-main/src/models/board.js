@@ -1,53 +1,54 @@
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-sequence")(mongoose);
 const boardsSchema = mongoose.Schema({
-    // 물품명
+    // 물품 번호
+    boardid: {
+        type: Number,
+    },
+    // 상품명
     title: {
         type : String,
         required : true, 
     },
     // 메이커
     enterprise: {
-        type: String, 
+        type: String,
         required : true,
+    },
+    // 물품 분류 1: 브랜드 2: 쇼핑몰 3: 럭셔리 4. 스포츠  5. 디지털 6. 라이프  
+    category: {
+        type : Number,
     },
     // 내용
     content: {  
         type : String, 
     },
-    //  1: 브랜드 2: 쇼핑몰  3: 럭셔리 4. 스포츠  5. 디지털 6. 라이프  
-    category: {
-        type : Number,
-        required : true, 
-    },
-    // 이미지 1
-    image1: {
-        type : String, 
-    },
-     // 이미지 2
-     image2: {
-        type : String, 
-    },
-     // 이미지 3
-     image3: {
-         type : String, 
-    },
     // 가격
     price: {
-        type : Number, 
-        required: true,
+        type: Number,
     },
-    // 세일 %
+    // 할인율
     discountper: {
         type: String,
     },
-    // 옵션
+    // 사이즈 옵션
     option: {
-        type: String,
+        type: String
     },
+    // 이미지
+    image1: {
+        type : String, 
+    },
+    image2: {
+        type : String, 
+    },
+    image3: {
+        type : String, 
+    },
+
 } , 
     {
-        timestamps: true, // 생성, 업데이트 시간 설정
+        timestamps: true, // 생성, 업데이트 시간 설정createAt updateAt
 
 });
 boardsSchema.plugin(autoIncrement, {
@@ -55,7 +56,7 @@ boardsSchema.plugin(autoIncrement, {
   });
 
 
-  const Boards = mongoose.model("Board", boardsSchema);
+const Boards = mongoose.model("Board", boardsSchema);
 
 
-  module.exports = { Boards, boardsSchema };
+module.exports = { Boards, boardsSchema };
