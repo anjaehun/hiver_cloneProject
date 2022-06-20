@@ -1,34 +1,58 @@
+const { number } = require("joi");
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-sequence")(mongoose);
 const cartsSchema = mongoose.Schema({
     // 게시판 번호 
-    cartid:{ 
-       type : Number, 
-    },
-    //제목
-    title: {
-        type : String,
-        required : true, 
-    },
-    // 기업명
-    enterprise: {  
-        type : String, 
+    boardid:{ 
+        type : Number, 
+     },
+     cartid:{
+        type : Number,
+     },
+   // 물품명
+   title: {
+    type : String,
+    required : true, 
+   },
+    // 메이커
+    enterprise: {
+        type: String, 
         required : true,
     },
+    // 내용
+    content: {  
+        type : String, 
+    },
     
-    // 대표 이미지
+    // 이미지 1
     image1: {
         type : String, 
-        required : false,
     },
-    // 옵션 
-    option: {
+    // 이미지 2
+    image2: {
         type : String, 
-        required : false,
+    },
+    // 이미지 3
+    image3: {
+        type : String, 
+    },
+    // 가격
+    price: {
+        type : Number, 
+        required: true,
+    },
+    // 세일 %
+    discountper: {
+        type: Number,
     },
     // 총 값 가격 
     totalprice: {
-        type : String, 
+        type : Number, 
+        
+    },
+    // cart수량 
+    quantity: {
+        type : Number, 
         required : false,
     },
     // 닉네임
@@ -37,17 +61,20 @@ const cartsSchema = mongoose.Schema({
         required : false,
     }
     
+    
 } , 
     {
         timestamps: true, // 생성, 업데이트 시간 설정createAt updateAt
 
 });
+
 cartsSchema.plugin(autoIncrement, {
     inc_field: "cartid",
-});
-
+  });
 
 const Carts = mongoose.model("Carts", cartsSchema);
+
+
 
 
 module.exports = { Carts, cartsSchema };
