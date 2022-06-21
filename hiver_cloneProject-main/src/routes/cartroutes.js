@@ -22,7 +22,7 @@ cartRouter.post("/board/:boardid/cart/",authMiddleware, async (req, res) => {
   isBasket  = await Carts.find({ boardid });
  
   if (isBasket.length) {
-    await Carts.updateOne({ cartid }, { $set: { quantity,totalprice } });
+    await Carts.updateOne({ boardid }, { $set: { quantity,totalprice } });
   } else {
     await Carts.create({  boardid:boardid,cartid, quantity: quantity, 
                          // param 값 
