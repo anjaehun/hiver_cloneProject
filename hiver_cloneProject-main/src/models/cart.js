@@ -43,7 +43,7 @@ const cartsSchema = mongoose.Schema({
     },
     // 세일 %
     discountper: {
-        type: Number,
+        type: String,
     },
     // 총 값 가격 
     totalprice: {
