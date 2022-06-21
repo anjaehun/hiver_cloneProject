@@ -8,11 +8,10 @@ const authMiddleware = require('../middlewares/authMiddleware');
 // 데이터 넣기 (CRUD 중 C(create)) authMiddleware, 
 boardRouter.post("/board" , async (req, res) => {
   try {
-    console.log('Hi')
     const { title, enterprise, category,
             image1, image2, image3, price, discountper, option} = req.body;
 
-    const createdBoards = await Boards.create({
+    const createdBoards  = await Boards.create({
             title, enterprise, category, image1, image2, image3, price, discountper, option });
     res.json({ boards: createdBoards });
   }catch(err){
@@ -37,12 +36,12 @@ boardRouter.get("/", async (req, res) => {
 boardRouter.get("/board/:boardid", async (req, res) => {
   try {
     const { boardid } = req.params
-    const existboards = await Board.find({ boardid }, { boardid: 1, title: 1, enterprise: 1, category: 1,
+    const existboards = await Boards.find({ boardid }, { boardid: 1, title: 1, enterprise: 1, category: 1,
       image1: 1, image2: 1, image3: 1, price: 1, discountper: 1, option: 1});
     if (!existboards.length) {
       return res.status(400).json({ errorMessage: "상품 없음"});
     }
-    return res.json({ success: true });
+    return res.json({ existboards });
   } catch(err) {
     res.status(400).send({
       errorMessage: "오류 검출",
@@ -55,7 +54,7 @@ boardRouter.get("/board/:boardid", async (req, res) => {
 boardRouter.delete("/api/board/:boardid", async (req, res) => {
   try {
     const { boardid } = req.params
-    const deleteboards = await Board.find({ boardid });
+    const deleteboards = await Boards.find({ boardid });
     if (deleteboards.length > 0) {
     await Board.deleteOne({ boardid })
     }

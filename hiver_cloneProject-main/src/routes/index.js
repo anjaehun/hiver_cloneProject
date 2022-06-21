@@ -1,5 +1,5 @@
 module.exports = {
-    // ...require('./commentroutes'),
+     ...require('./reviewroutes'),
      ...require('./boardroutes'),
      ...require('./authroutes'),
     // ...require('./relationroutes'),

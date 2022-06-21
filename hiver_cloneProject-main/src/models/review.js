@@ -1,5 +1,5 @@
-const moogoose = require("mongoose");
-const AutoIncrementFactory = require('mongoose-sequence')(mongoose);
+const mongoose = require("mongoose");
+const AutoIncrement = require('mongoose-sequence')(mongoose);
 const reviewSchema = new mongoose.Schema({
     boardid : {
         type : Number,
@@ -23,12 +23,19 @@ const reviewSchema = new mongoose.Schema({
         type : String,
     },
     img1 : {
-        String,
+        type :String,
     },    
+    nickname : {
+        type : String,
+        required : true,
+    }
 });
 reviewSchema.plugin(AutoIncrement, {inc_field: 'reviewid'});
 
-reviewschema.index({created : -1});
+reviewSchema.index({created : -1});
 
-module.exports = mongoose.model("Review", reviewSchema);
+const Reviews = mongoose.model("Review", reviewSchema );
+
+
+module.exports = { Reviews, reviewSchema };
 
