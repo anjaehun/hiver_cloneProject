@@ -39,7 +39,7 @@ const boardsSchema = mongoose.Schema({
     },
     // 세일 %
     discountper: {
-        type: Number,
+        type: String,
     },
     // 옵션
     option: {

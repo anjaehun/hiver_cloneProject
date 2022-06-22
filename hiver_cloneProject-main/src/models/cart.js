@@ -38,7 +38,7 @@ const cartsSchema = mongoose.Schema({
     },
     // 가격
     price: {
-        type : Number, 
+        type : String, 
         required: true,
     },
     // 세일 %

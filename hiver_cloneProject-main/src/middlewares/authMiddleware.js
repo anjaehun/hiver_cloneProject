@@ -46,6 +46,7 @@ module.exports = (req, res, next) => {
             const { nickname } = jwt.verify(tokenValue, process.env.NODE_JWT);
             Users.findOne({ nickname }).exec().then((user) => {
                 res.locals.user = user;
+                console.log(res.locals.user)
                 next();
             });
         }

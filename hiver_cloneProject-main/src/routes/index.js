@@ -1,7 +1,8 @@
 module.exports = {
-    // ...require('./commentroutes'),
+     ...require('./reviewroutes'),
      ...require('./boardroutes'),
      ...require('./authroutes'),
      ...require('./cartroutes'),
-    // ...require('./bookmarksLim'),
+    ...require('./qnaroutes'),
+
   }
