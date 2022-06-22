@@ -2,8 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require("express");
 const boardRouter = express.Router({ mergeParams: true });
-const multer = require('multer')
-const upload = multer({dest: 'images/'}) //dest : 저장 위치
+
 
 
 const {Boards} = require("../models/");
@@ -13,10 +12,10 @@ const authMiddleware = require('../middlewares/authMiddleware');
 boardRouter.post("/board" , async (req, res) => {
   try {
     const { title, enterprise, category,
-            image1, image2, image3, price, discountper, option} = req.body;
+            image1, image2, image3, price, discountper, option1, option2, option3} = req.body;
 
     const createdBoards = await Boards.create({
-            title, enterprise, category, image1, image2, image3, price, discountper, option });
+            title, enterprise, category, image1, image2, image3, price, discountper, option1, option2, option3 });
     res.json({ boards: createdBoards });
   }catch(err){
     res.status(400).send({err: err.message});
@@ -41,7 +40,7 @@ boardRouter.get("/board/:boardid", async (req, res) => {
   try {
     const { boardid } = req.params
     const existboards = await Boards.find({ boardid }, { boardid: 1, title: 1, enterprise: 1, category: 1,
-      image1: 1, image2: 1, image3: 1, price: 1, discountper: 1, option: 1});
+      image1: 1, image2: 1, image3: 1, price: 1, discountper: 1, option1: 1, option2: 1, option3: 1});
     if (!existboards.length) {
       return res.status(400).json({ errorMessage: "상품 없음"});
     }
@@ -58,7 +57,7 @@ boardRouter.get("/board/:boardid", async (req, res) => {
 boardRouter.delete("/board/:boardid", async (req, res) => {
   try {
     const { boardid } = req.params
-    const deleteboards = await Board.find({ boardid });
+    const deleteboards = await Boards.find({ boardid });
     if (deleteboards.length > 0) {
     await Boards.deleteOne({ boardid })
     }
@@ -69,11 +68,6 @@ boardRouter.delete("/board/:boardid", async (req, res) => {
     })
   }
 }) 
-
-boardRouter.post('/upload',upload.single('img'),(req,res) => {
-  res.json(req.file)
-  console.log(req.file)
-})
 
 
 module.exports = { boardRouter };

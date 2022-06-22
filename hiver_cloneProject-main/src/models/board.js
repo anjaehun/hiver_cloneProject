@@ -15,26 +15,30 @@ const boardsSchema = mongoose.Schema({
         type: String,
         required : true,
     },
-    // 상품 분류 1: 브랜드 2: 쇼핑몰 3: 럭셔리 4. 스포츠  5. 디지털 6. 라이프  
-    category: {
-        type : Number,
-    },
     // 내용
     content: {  
         type : String, 
     },
     // 가격
     price: {
-        type: Number,
+        type: String,
+        required: true,
     },
     // 할인율
     discountper: {
         type: String,
     },
     // 사이즈 옵션
-    option: {
+    option1: {
         type: String
     },
+    option2: {
+        type: String
+    },
+    option3: {
+        type: String
+    },
+    
     // 이미지
     image1: {
         type : String, 
@@ -54,6 +58,7 @@ const boardsSchema = mongoose.Schema({
 boardsSchema.plugin(autoIncrement, {
     inc_field: "boardid",
   });
+
 
 
 const Boards = mongoose.model("Board", boardsSchema);
