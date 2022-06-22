@@ -36,10 +36,14 @@ const cartsSchema = mongoose.Schema({
     image3: {
         type : String, 
     },
+    // 이미지 3
+    option: {
+        type : String, 
+    },
     // 가격
     price: {
         type : String, 
-        required: true,
+        required: false,
     },
     // 세일 %
     discountper: {

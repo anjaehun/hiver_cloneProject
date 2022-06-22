@@ -10,31 +10,37 @@ const e = require('express');
 // 장바구니 등록! 
 cartRouter.post("/board/:boardid/cart/",authMiddleware, async (req, res) => {
   try {
-  const { boardid,cartid } = req.params;
-  const { quantity,totalprice } = req.body;
+  const { boardid} = req.params;
+  const { option,quantity } = req.body;
   const { nickname } = res.locals.user;
   let [board] = await Boards.find({ boardid });
-  
+  console.log(board)
   //board 콘솔 테스트 (필요할때 주석 지우고 쓸것 )
-  //console.log(board.title);console.log(board.enterprise);console.log(board.image1);
-  //console.log(board.discountper); console.log(totalprice);
-             
-  isBasket  = await Boards.find({ boardid},{});
-   console.log(isBasket)
-  if (isBasket.length) {
-    await Carts.updateOne({ boardid,nickname }, { $set: { quantity,totalprice } });
-  } else {
-    await Carts.create({boardid},{  boardid:boardid,cartid, 
-                         // param 값 
+  //console.log(board.title);
+  //console.log(board.enterprise);console.log(board.image1);
+  //console.log(board.discountper); //console.log(totalprice);
+  //SELECT * FROM users WHERE a=1 and b='q'
+   //Carts.find({a:1,b:'q'})
+  //let [cart] = Carts.find({boardid:boardid,option:option})
+  let [cart] = await Carts.find({boardid:boardid,option:option})
+  console.log(cart);
+  //if(cart){
+    
+  if(cart){
+    return res.status(400).json({ sucess: false, msg : "이미 동일한 값이 존재합니다"});
+  }
+
+    await Carts.create({  boardid     :   boardid,
                           nickname    :   nickname, 
                           title       :   board.title, 
                           enterprise  :   board.enterprise,
                           discountper :   board.discountper,
                           image1      :   board.image1, 
-                          option      :   board.option,
                           price       :   board.price, 
+                          quantity, 
+                          option,
                           });
-  }
+  
   res.send({ result: "마이페이지 카트 목록이 저장되었습니다." });
   }catch(err){
     res.status(400).send({err: err.message});
@@ -49,7 +55,7 @@ cartRouter.get("/cart",authMiddleware, async (req, res) => {
   // #swagger.description = "게시글 전체 조회 페이지"
   try {
   const { nickname } = res.locals.user;
-  let [cart] = await Carts.find({ nickname });
+  //let [cart] = await Carts.find({ nickname });
   console.log(nickname)
   
   if(!nickname){
