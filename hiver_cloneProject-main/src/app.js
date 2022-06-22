@@ -1,6 +1,9 @@
-const dotenv = require('dotenv');
-dotenv.config()
 
+
+const dotenv = require('dotenv');
+const webSocet = require("ws");
+
+dotenv.config()
 const express = require('express');
 const app = express();
 const cors = require('cors');
@@ -9,7 +12,7 @@ const mongoose = require("mongoose");
 
 const http = Http.createServer(app);
 
-const {authRouter,boardRouter,cartRouter} = require('./routes');
+const {authRouter,boardRouter,cartRouter,reviewRouter} = require('./routes');
 
 const swaggerUi =require("swagger-ui-express");
 const swaggerFile = require("./swagger-output");
@@ -32,7 +35,7 @@ const server = async () => {
 
     app.use(express.urlencoded({ extended: false }));
     
-    app.use("/api", [authRouter,boardRouter,cartRouter]);
+    app.use("/api", [authRouter,boardRouter,cartRouter,reviewRouter]);
 
     app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerFile, {explorer: true}));
   

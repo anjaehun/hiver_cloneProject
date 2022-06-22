@@ -17,6 +17,7 @@ const cartsSchema = mongoose.Schema({
     // 메이커
     enterprise: {
         type: String, 
+        required : true,
     },
     // 내용
     content: {  
@@ -38,6 +39,7 @@ const cartsSchema = mongoose.Schema({
     // 가격
     price: {
         type : String, 
+        required: true,
     },
     // 세일 %
     discountper: {
@@ -46,6 +48,7 @@ const cartsSchema = mongoose.Schema({
     // 총 값 가격 
     totalprice: {
         type : Number, 
+        
     },
     // cart수량 
     quantity: {
