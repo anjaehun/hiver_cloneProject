@@ -83,7 +83,7 @@ reviewRouter.put('/board/:boardid/review/:reviewid', authMiddleware, async (req,
 
 // review 삭제
 
-reviewRouter.put('/board/:boardid/review/:reviewid', authMiddleware, async (req,res) => {
+reviewRouter.delete('/board/:boardid/review/:reviewid', authMiddleware, async (req,res) => {
     try {
         const { boardid, reviewid } = req.params;
         const { nickname } = res.locals.user;
