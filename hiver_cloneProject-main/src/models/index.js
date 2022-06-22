@@ -3,8 +3,7 @@ module.exports = {
     ...require('./cart'),
     ...require('./board'),
     ...require('./order'),
-    ...require('./review'),
-    ...require('./qna'),
+    ...require('./review')
 } 
 
  
