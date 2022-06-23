@@ -15,13 +15,7 @@ cartRouter.post("/board/:boardid/cart/",authMiddleware, async (req, res) => {
   const { nickname } = res.locals.user;
   let [board] = await Boards.find({ boardid });
   console.log(board)
-  //board 콘솔 테스트 (필요할때 주석 지우고 쓸것 )
-  //console.log(board.title);
-  //console.log(board.enterprise);console.log(board.image1);
-  //console.log(board.discountper); //console.log(totalprice);
-  //SELECT * FROM users WHERE a=1 and b='q'
-   //Carts.find({a:1,b:'q'})
-  //let [cart] = Carts.find({boardid:boardid,option:option})
+  
   let [cart] = await Carts.find({boardid:boardid,option:option})
   console.log(cart);
   //if(cart){
@@ -73,6 +67,22 @@ cartRouter.get("/cart",authMiddleware, async (req, res) => {
     res.status(400).send({err: err.message});
   }
 });
+
+// 상품 삭제
+cartRouter.delete("/board/:boardid/cart/:cartid", async (req, res) => {
+  try {
+    const { boardid,cartid } = req.params
+    const deleteboards = await Carts.find({ boardid,cartid });
+    if (deleteboards.length > 0) {
+    await Carts.deleteOne({ boardid, cartid})
+    }
+    return res.json({ success: true })
+  } catch(err) {
+    res.status(400).send({
+      errorMessage: "삭제 오류"
+    })
+  }
+}) 
 
 // 주문 하기 
 cartRouter.post("/order/:totalprice",authMiddleware, async (req, res) => {
