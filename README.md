@@ -11,8 +11,8 @@
 
 # ERD 
 논리적 erd
-![image](https://user-images.githubusercontent.com/77096665/175225694-6fc8713d-112a-4b4c-83d3-722809eecb33.png)
-물리적 erd
+![image](https://user-images.githubusercontent.com/77096665/175225694-6fc8713d-112a-4b4c-83d3-722809eecb33.png) 
+  물리적 erd
 ![image](https://user-images.githubusercontent.com/77096665/175225743-a0a90e43-0bc3-4a1f-84c1-bc75616076bf.png)
 
 
