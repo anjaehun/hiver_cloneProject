@@ -7,12 +7,24 @@
 # 팀원 
 안재훈 : 로그인 , 장바구니
 이재석 : 게시판 
-채예찬 : REVIEW
+채예찬 : REVIEW, qna 
 
 # ERD 
-![image](https://user-images.githubusercontent.com/77096665/175223150-b1310583-9b3c-4993-aeb6-705469aaf961.png)
+논리적 erd
+![image](https://user-images.githubusercontent.com/77096665/175225694-6fc8713d-112a-4b4c-83d3-722809eecb33.png)
+물리적 erd
+![image](https://user-images.githubusercontent.com/77096665/175225743-a0a90e43-0bc3-4a1f-84c1-bc75616076bf.png)
 
-# API 
+# r 
+Server: AWS EC2
+Framework: node.js
+Database: MongoDB, firebase, s3
+FrontEnd : react, axios
+Tool : Git, Notion
+
+# 개발툴
+
 
 # TrobleShooting
+
 
