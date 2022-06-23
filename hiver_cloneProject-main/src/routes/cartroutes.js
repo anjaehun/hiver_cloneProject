@@ -69,12 +69,12 @@ cartRouter.get("/cart",authMiddleware, async (req, res) => {
 });
 
 // 상품 삭제
-cartRouter.delete("/board/:boardid/cart/:cartid", async (req, res) => {
+cartRouter.delete("/cart/:cartid/delete", async (req, res) => {
   try {
-    const { boardid,cartid } = req.params
-    const deleteboards = await Carts.find({ boardid,cartid });
+    const { cartid } = req.params
+    const deleteboards = await Carts.find({ cartid });
     if (deleteboards.length > 0) {
-    await Carts.deleteOne({ boardid, cartid})
+    await Carts.deleteOne({cartid})
     }
     return res.json({ success: true })
   } catch(err) {
