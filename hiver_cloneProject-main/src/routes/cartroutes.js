@@ -69,10 +69,11 @@ cartRouter.get("/cart",authMiddleware, async (req, res) => {
 });
 
 // 상품 삭제
-cartRouter.delete("/cart/:cartid/delete", async (req, res) => {
+cartRouter.delete("/cart/:cartid/delete",authMiddleware, async (req, res) => {
   try {
     const { cartid } = req.params
-    const deleteboards = await Carts.find({ cartid });
+    const { nickname } = res.locals.user;
+    const deleteboards = await Carts.find({nickname:nickname,cartid},{});
     if (deleteboards.length > 0) {
     await Carts.deleteOne({cartid})
     }
